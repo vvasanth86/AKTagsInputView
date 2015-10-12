@@ -12,7 +12,7 @@
 
 - (id)initWithFrame:(CGRect)frame
 {
-	frame.size.height = 44;
+	frame.size.height = 34;
     self = [super initWithFrame:frame];
     if (self) {
         [self addSubview:self.collectionView];
