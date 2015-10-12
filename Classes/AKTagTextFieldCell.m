@@ -17,6 +17,7 @@
 		_textField.autoresizingMask = UIViewAutoresizingFlexibleHeight  | UIViewAutoresizingFlexibleWidth;
 		_textField.buttonPlaceholder = @"+ Add";
 		_textField.autocorrectionType = UITextAutocorrectionTypeNo;
+        _textField.backgroundColor = [UIColor whiteColor];
 		[self.contentView addSubview:_textField];
     }
     return self;
