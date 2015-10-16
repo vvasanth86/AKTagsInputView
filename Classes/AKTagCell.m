@@ -7,7 +7,7 @@
 #import "AKTagsDefines.h"
 #import "AKTagCell.h"
 #import "NSString+StringSizeWithFont.h"
-#define TAG_CELL_PADDING 5.0f
+#define TAG_CELL_PADDING 8.0f
 #define TAG_CELL_BTN_W 14.0f
 #define TAG_CELL_H 30.0f
 

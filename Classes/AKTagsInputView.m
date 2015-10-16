@@ -93,8 +93,8 @@
         [self addNewItemWithString:textField.tagName completion:nil];
     }
     textField.text = nil;
-    if ([self.delegate respondsToSelector:@selector(tagsInputViewDidEndEditing:textField:)]) {
-        [self.delegate tagsInputViewDidEndEditing:self textField:textField];
+    if ([self.delegate respondsToSelector:@selector(tagsInputViewDidEndEditing:)]) {
+        [self.delegate tagsInputViewDidEndEditing:self];
     }
 }
 
@@ -111,6 +111,7 @@
     if ([self canInsertNewTagName:textField.text]) {
         [self addNewItemWithString:textField.tagName completion:nil];
     }
+    [textField resignFirstResponder];
     return YES;
 }
 

@@ -14,7 +14,7 @@
 @optional
 -(BOOL)validateTag:(NSString*)tagName;
 -(void)tagsInputViewDidBeginEditing:(AKTagsInputView*)inputView;
--(void)tagsInputViewDidEndEditing:(AKTagsInputView*)inputView textField:(AKTextField *)textField;
+-(void)tagsInputViewDidEndEditing:(AKTagsInputView*)inputView;
 -(void)tagsInputViewDidAddTag:(AKTagsInputView*)inputView;
 -(void)tagsInputViewDidRemoveTag:(AKTagsInputView*)inputView;
 @end
