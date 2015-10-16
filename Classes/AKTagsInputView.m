@@ -80,61 +80,59 @@
 }
 
 #pragma mark - textFieldCell's delegate
--(void)textFieldDidBeginEditing:(AKTextField *)textField
-{
+
+-(void)textFieldDidBeginEditing:(AKTextField *)textField {
     [self restoreZWWSIfNeeded:textField];
     if ([self.delegate respondsToSelector:@selector(tagsInputViewDidBeginEditing:)]){
         [self.delegate tagsInputViewDidBeginEditing:self];
     }
 }
--(void)textFieldDidEndEditing:(AKTextField *)textField
-{
+
+-(void)textFieldDidEndEditing:(AKTextField *)textField {
     if ([self canInsertNewTagName:textField.text]){
         [self addNewItemWithString:textField.tagName completion:nil];
     }
     textField.text = nil;
-    if ([self.delegate respondsToSelector:@selector(tagsInputViewDidEndEditing:)]){
-        [self.delegate tagsInputViewDidEndEditing:self];
+    if ([self.delegate respondsToSelector:@selector(tagsInputViewDidEndEditing:textField:)]) {
+        [self.delegate tagsInputViewDidEndEditing:self textField:textField];
     }
 }
--(BOOL)canInsertNewTagName:(NSString *)tagName
-{
+
+-(BOOL)canInsertNewTagName:(NSString *)tagName {
     tagName = [self trimmedString:tagName];
-    if ([self tagNameIsNotEmpty:tagName]){
+    if ([self tagNameIsNotEmpty:tagName]) {
         return YES;
     } else {
         return NO;
     }
 }
--(BOOL)textFieldShouldReturn:(AKTextField *)textField
-{
-    if ([self canInsertNewTagName:textField.text]){
+
+-(BOOL)textFieldShouldReturn:(AKTextField *)textField {
+    if ([self canInsertNewTagName:textField.text]) {
         [self addNewItemWithString:textField.tagName completion:nil];
     }
     return YES;
 }
 
-- (void)restoreZWWSIfNeeded:(AKTextField *)textField
-{
-    if ([textField.text rangeOfString:ZWWS].location == NSNotFound){
+- (void)restoreZWWSIfNeeded:(AKTextField *)textField {
+    if ([textField.text rangeOfString:ZWWS].location == NSNotFound) {
         textField.text = [NSString stringWithFormat:@"%@%@", ZWWS, textField.tagName];
     }
 }
 
--(BOOL)textField:(AKTextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    if (self.insertingInProgress){
+-(BOOL)textField:(AKTextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (self.insertingInProgress) {
         return NO;
     }
     BOOL isBackSpace = NO;
     AKTagCell *lastTagCell;
-    if (self.selectedTags.count){
+    if (self.selectedTags.count) {
         lastTagCell = (AKTagCell*)[self.collectionView cellForItemAtIndexPath:[NSIndexPath indexPathForRow:self.selectedTags.count-1 inSection:0]];
     }
-    if ([string isEqualToString:@""]){
+    if ([string isEqualToString:@""]) {
         isBackSpace = YES;
         
-        if ([textField.text rangeOfString:ZWWS].location == 0 && textField.text.length == 1 && self.selectedTags.count){
+        if ([textField.text rangeOfString:ZWWS].location == 0 && textField.text.length == 1 && self.selectedTags.count) {
             if (!lastTagCell.isReadyForDelete) {
                 [lastTagCell prepareForDelete];
                 return NO;
@@ -145,12 +143,12 @@
         }
     }
     
-    if (!isBackSpace){
+    if (!isBackSpace) {
         [lastTagCell resetReadyForDeleteStatus];
         NSCharacterSet *forbiddenCharSet  = [NSCharacterSet characterSetWithCharactersInString:_forbiddenCharsString];
         string = [string stringByTrimmingCharactersInSet:forbiddenCharSet];
         
-        if (string.length == 0){
+        if (string.length == 0) {
             textField.backgroundColor = [UIColor redColor];
             [UIView animateWithDuration:0.3f animations:^{
                 textField.backgroundColor = [UIColor whiteColor];

@@ -9,11 +9,12 @@
 #define DEFAULT_FORBIDDEN_CHARS_STRING (@"!$%^&*+.") // these chars are standart hashtags forbidden ones, but I'd allow 'space' char
 
 @class AKTagsInputView;
+@class AKTextField;
 @protocol AKTagsInputViewDelegate <AKTagsListViewDelegate>
 @optional
 -(BOOL)validateTag:(NSString*)tagName;
 -(void)tagsInputViewDidBeginEditing:(AKTagsInputView*)inputView;
--(void)tagsInputViewDidEndEditing:(AKTagsInputView*)inputView;
+-(void)tagsInputViewDidEndEditing:(AKTagsInputView*)inputView textField:(AKTextField *)textField;
 -(void)tagsInputViewDidAddTag:(AKTagsInputView*)inputView;
 -(void)tagsInputViewDidRemoveTag:(AKTagsInputView*)inputView;
 @end
