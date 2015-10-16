@@ -9,7 +9,7 @@
 #import "NSString+StringSizeWithFont.h"
 #define TAG_CELL_PADDING 5.0f
 #define TAG_CELL_BTN_W 14.0f
-#define TAG_CELL_H 25.0f
+#define TAG_CELL_H 30.0f
 
 
 @interface AKTagCell ()
@@ -25,7 +25,7 @@
     self = [super initWithFrame:frame];
     if (self) {
 		self.backgroundColor = WK_COLOR_GRAY_244;
-		self.layer.cornerRadius = 3;
+		self.layer.cornerRadius = 8;
 		self.clipsToBounds = YES;
         
 		_tagLabel = [[UILabel alloc] initWithFrame:self.bounds];

@@ -82,6 +82,9 @@
 	cell.delegate = self;
 	cell.showDeleteButton = self.allowDeleteTags;
 	[self configureCell:cell atIndexPath:indexPath];
+    if ([self.delegate respondsToSelector:@selector(configureTagView:atIndexPath:)]) {
+        [self.delegate configureTagView:cell atIndexPath:indexPath];
+    }
 	return cell;
 }
 
