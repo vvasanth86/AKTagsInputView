@@ -60,6 +60,7 @@
         if (!_textFieldCell){ // I don't want my CV to nullify my textFieldCell's content while reusing cells, I store the cell in memory
             _textFieldCell = [collectionView dequeueReusableCellWithReuseIdentifier:@"textFieldCell" forIndexPath:indexPath];
             _textFieldCell.textField.delegate = self;
+            _textFieldCell.textField.backgroundColor = collectionView.backgroundColor;
             if (_enableTagsLookup){
                 _lookup = [[AKTagsLookup alloc] initWithTags:_lookupTags];
                 _lookup.delegate = self;
